@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dành riêng cho em ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Hiệu ứng trái tim rơi */
+        @keyframes fall {
+            0% {
+                top: -10%;
+                opacity: 1;
+            }
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
+        }
+
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            animation: fall linear infinite;
+            z-index: 1;
+        }
+
+        /* Trang đăng nhập */
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #ff6b9d;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.4);
+            animation: pulse 2s ease infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        h1 {
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .password-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        input[type="password"] {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+            background: #f8f9fa;
+        }
+
+        input[type="password"]:focus {
+            border-color: #ff6b9d;
+            background: white;
+            box-shadow: 0 5px 15px rgba(255, 107, 157, 0.2);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #ff6b9d, #c471ed);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.4);
+        }
+
+        .error-message {
+            color: #ff4757;
+            margin-top: 10px;
+            font-size: 14px;
+            display: none;
+        }
+
+        /* Trang nội dung */
+        .content-container {
+            display: none;
+            max-width: 1200px;
+            width: 95%;
+            margin: 20px auto;
+            position: relative;
+            z-index: 10;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .photo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .caption {
+            color: #333;
+            text-align: center;
+            font-size: 16px;
+            line-height: 1.6;
+            padding: 10px;
+        }
+
+        .caption strong {
+            color: #ff6b9d;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .footer-message {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            color: #764ba2;
+            font-size: 18px;
+            line-height: 1.8;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .emoji {
+            font-size: 24px;
+            margin: 0 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hiệu ứng trái tim rơi -->
+    <div id="hearts"></div>
+
+    <!-- Trang đăng nhập -->
+    <div class="login-container" id="loginPage">
+        <img src="n1.jpg" alt="Profile" class="profile-img">
+        <h1>Chỉ dành cho em thôi nhé 💕</h1>
+        <p class="subtitle">Nhập mật khẩu để khám phá điều đặc biệt...</p>
+        
+        <div class="password-group">
+            <input type="password" id="passwordInput" placeholder="🔐 Nhập mật khẩu tại đây...">
+        </div>
+        
+        <button class="btn-submit" onclick="checkPassword()">✨ Mở khóa ✨</button>
+        <p class="error-message" id="errorMsg">Ối! Sai mật khẩu rồi, thử lại đi em 🥺</p>
+    </div>
+
+    <!-- Trang nội dung -->
+    <div class="content-container" id="contentPage">
+        <div class="header">
+            <h2>🌸 Những khoảnh khắc đáng nhớ 🌸</h2>
+            <p>Có những thứ không cần nói ra, chỉ cần cảm nhận thôi...</p>
+        </div>
+
+        <div class="gallery">
+            <div class="photo-card">
+                <img src="https://via.placeholder.com/400x300/FFB6C1/FFFFFF?text=Photo+1" alt="Photo 1">
+                <div class="caption">
+                    <strong>Nụ cười của em</strong>
+                    Có một thứ làm anh mất tập trung suốt cả ngày... À thì ra là nụ cười của em đấy. Nguy hiểm ghê 😊
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <img src="https://via.placeholder.com/400x300/DDA0DD/FFFFFF?text=Photo+2" alt="Photo 2">
+                <div class="caption">
+                    <strong>Ánh mắt clear</strong>
+                    Người ta nói mắt là cửa sổ tâm hồn, vậy anh xin phép được... ngắm cửa sổ một chút nhé 🌟
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <img src="https://via.placeholder.com/400x300/F0E68C/FFFFFF?text=Photo+3" alt="Photo 3">
+                <div class="caption">
+                    <strong>Khoảnh khắc cute</strong>
+                    Anh đang tự hỏi liệu có phải em đã lấy trộm ánh sao trên trời không, vì sao em lấp lánh thế? ✨
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <img src="https://via.placeholder.com/400x300/98FB98/FFFFFF?text=Photo+4" alt="Photo 4">
+                <div class="caption">
+                    <strong>Vibe đỉnh của đỉnh</strong>
+                    Có một người làm anh nghĩ mãi không ra... Chắc phải tìm cách gặp mặt để hỏi cho rõ thôi 🤔
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <img src="https://via.placeholder.com/400x300/FFE4B5/FFFFFF?text=Photo+5" alt="Photo 5">
+                <div class="caption">
+                    <strong>Góc nghiêng thần thánh</strong>
+                    Anh không phải nhiếp ảnh gia nhưng anh có thể hình dung được khoảnh khắc đẹp nhất... là khi được ở bên em 📸
+                </div>
+            </div>
+
+            <div class="photo-card">
+                <img src="https://via.placeholder.com/400x300/E0BBE4/FFFFFF?text=Photo+6" alt="Photo 6">
+                <div class="caption">
+                    <strong>Main character energy</strong>
+                    Hôm nay trời đẹp nhỉ? Nhưng có lẽ không đẹp bằng một ai đó... Anh đang nói về thời tiết đấy nhé 😏
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-message">
+            <p><span class="emoji">💭</span></p>
+            <p>Có những điều muốn nói mà không biết bắt đầu từ đâu...</p>
+            <p>Có những cảm xúc cứ lưng lờ, không rõ ràng nhưng lại thật đặc biệt...</p>
+            <p>Anh nghĩ, đôi khi ta không cần vội vàng đặt tên cho mọi thứ,</p>
+            <p>Chỉ cần để thời gian... và những khoảnh khắc bên nhau trả lời.</p>
+            <p><span class="emoji">🌙</span></p>
+            <p style="margin-top: 20px; color: #ff6b9d; font-weight: bold;">
+                Hay là... chúng ta cùng tạo thêm nhiều kỷ niệm hơn nhé? 🌸
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Tạo hiệu ứng trái tim rơi
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 5 + 's';
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        setInterval(createHeart, 800);
+
+        // Kiểm tra mật khẩu
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            const correctPassword = 'yeuem'; // Thay đổi mật khẩu tại đây
+            
+            if (password === correctPassword) {
+                document.getElementById('loginPage').style.display = 'none';
+                document.getElementById('contentPage').style.display = 'block';
+            } else {
+                document.getElementById('errorMsg').style.display = 'block';
+                document.getElementById('passwordInput').value = '';
+                
+                setTimeout(() => {
+                    document.getElementById('errorMsg').style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // Cho phép nhấn Enter để submit
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // Animation khi scroll
+        window.addEventListener('scroll', function() {
+            const cards = document.querySelectorAll('.photo-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (cardTop < windowHeight - 100) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
